@@ -1,0 +1,24 @@
+*** Settings ***
+Library           ../../../uxdrive/trunk/robotest.py
+Resource          ts19.txt
+
+*** Keywords ***
+Uxdrive Server Setup
+    [Arguments]    ${VM_CLIENT_OS_TYPE}    @{tests}
+    Import Library    String
+    Uxdrive Set Sikulix Server    ${TS19_XLINK_ADDRESS}
+    Uxdrive Upload And Install Testlibs    ${UXDRIVE_TEST_LIBS_PATH}    ${VM_CLIENT_OS_TYPE}    ${tests}
+    Import Library    Remote    ${TS19_XLINK_ADDRESS}    5 minutes    WITH NAME    sikuliserver
+    Reload Library    sikuliserver
+    ${last_error}=    Uxdrive Get Startup Error
+    Should Be Empty    ${last_error}    There is something wrong in the Sikuli test (python file).
+    ${OS}=    Uxdrive Get OS
+    ${OS_VERSION}=    Uxdrive Get OS Version
+    ${SIKULI_VERSION}=    Uxdrive Get Sikulix Version
+    ${NUMBER_OF_SCREENS}=    Uxdrive Get Number Of Screens
+    Uxdrive Show Actions    false
+    Uxdrive Move Mouse Delay    0
+
+Uxdrive Server Teardown
+    Uxdrive get sikulix logfile
+    sikuliserver.Stop Remote Server

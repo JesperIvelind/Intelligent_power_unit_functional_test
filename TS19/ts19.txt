@@ -1,0 +1,10 @@
+*** Settings ***
+Library           xLink    http://192.168.10.101    TS19    True    WITH NAME    ts19
+Resource          uxdrive.txt
+Resource          uxdrive manager.txt
+
+*** Variables ***
+${IODRIVE_TS19_IP}    192.168.10.62    # IP address to the TS19 test system
+${UXDRIVE_TEST_LIBS_PATH}    ${CURDIR}${/}..${/}..${/}tests    # Local path to testlibs
+${UXDRIVE_NO_VM_REVERT}    0    # If set to 1, VM will not revert. Good for test development.
+${UXDRIVE_NO_VM_SUSPEND}    0    # If set to 1, Vm will not suspend when test finishes. Good for test development.

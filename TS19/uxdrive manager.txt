@@ -1,0 +1,17 @@
+*** Settings ***
+Resource          ts19.txt
+
+*** Variables ***
+
+*** Keywords ***
+Uxdrive Manager Setup
+    [Arguments]    ${VM_NAME}    ${SNAPSHOT_NAME}
+    [Documentation]    TODO: robotest.py is not importable when running from RIDE.
+    Run Keyword Unless    ${UXDRIVE_NO_VM_REVERT}==1    Uxdrive Manager Restore Snapshot    ${VM_NAME}    ${SNAPSHOT_NAME}
+    Run Keyword Unless    ${UXDRIVE_NO_VM_REVERT}==1    Uxdrive Manager Create    ${VM_NAME}
+    ${TS19_XLINK_ADDRESS}    Catenate    SEPARATOR=:    http://${IODRIVE_TS19_IP}    1337
+    Set Global Variable    ${TS19_XLINK_ADDRESS}
+
+Uxdrive Manager Teardown
+    [Arguments]    ${VM_NAME}
+    Run Keyword Unless    ${UXDRIVE_NO_VM_SUSPEND}==1    Uxdrive Manager Suspend    ${VM_NAME}
