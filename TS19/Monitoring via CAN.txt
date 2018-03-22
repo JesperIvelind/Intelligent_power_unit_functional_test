@@ -1,1 +1,6 @@
 *** Test Cases ***
+Input voltage
+
+Output current
+
+PU temperature

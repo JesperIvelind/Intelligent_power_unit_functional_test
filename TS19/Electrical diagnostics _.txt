@@ -1,1 +1,2 @@
 *** Test Cases ***
+Memory check at startup

@@ -1,1 +1,12 @@
 *** Test Cases ***
+CAN Id
+
+System wake-up
+
+Alive counters
+
+Checksum
+
+Over current protection
+
+General purpose DIGOUT
